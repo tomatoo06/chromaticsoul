@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: url("Artboard\ 5\ copy.png") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #e35229;
+            margin-top: -20;
+            
+        }
+
+        .logo-box {
+            background-color: rgba(255, 255, 255, 0.5);
+            width: 300px;
+            height: 150px;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+          
+            object-fit: cover;
+        }
+
+        button {
+            padding: 14px 40px;
+            border: none;
+            border-radius: 40px;
+            background-color: #2b819f;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body>
+    <h1></h1>
+
+    <div class="logo-box">
+   <img src="Logo2-03.png" alt="Logo">
+        <!-- <img src="your-logo.png" alt="Logo"> -->
+    </div>
+
+    <button onclick="goToNext()">START</button>
+
+    <script>
+        function goToNext() {
+            document.body.style.opacity = 0;
+            setTimeout(() => {
+                window.location.href = "next.html"; // ปรับลิงก์ไปยังหน้าถัดไป
+            }, 500);
+        }
+    </script>
+</body>
+
+</html>
