@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Next</title>
+    <title>CHROMATIC SOUL</title>
     <style>
         body {
             margin: 0;
@@ -12,39 +12,34 @@
             background: url("Artboard 5 copy.png") no-repeat center center fixed;
             background-size: cover;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             height: 100vh;
             overflow: hidden;
-            position: relative;
+            transition: opacity 0.6s ease;
         }
 
-        body::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: 0;
+        .fade-out {
+            opacity: 0;
         }
 
-        .content-box {
+        .wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 210px;
-            /* <<< ปรับตรงนี้เพื่อเลื่อนข้อความกับปุ่มลง */
-            z-index: 1;
+            text-align: center;
+            max-width: 90%;
         }
 
         .line {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 1s ease, transform 1s ease;
+            transition: opacity 0.8s ease, transform 0.8s ease;
             font-size: 20px;
-            margin: 10px 30px;
-            text-align: center;
-            max-width: 90%;
             color: #2b819f;
+            margin: 10px 0;
+            line-height: 1.6;
+            max-width: 400px;
         }
 
         .line.visible {
@@ -52,83 +47,114 @@
             transform: translateY(0);
         }
 
-        button {
-            margin-top: 60px;
+        #nextBtn {
+            margin-top: 40px;
             padding: 14px 40px;
             border: none;
             border-radius: 40px;
             background-color: #e35229;
-            color: rgb(255, 255, 255);
+            color: white;
             font-size: 18px;
             cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #735247;
-        }
-
-        button:active {
+            opacity: 0;
             transform: scale(0.95);
+            transition: opacity 0.5s ease, transform 0.3s ease, background-color 0.3s ease;
+            pointer-events: none;
         }
 
-        .logo-box {
-            width: 300px;
-            height: 200px;
-            margin-top: 40px;
-            /* <<< ลดลงเล็กน้อยให้บาลานซ์กับ content */
-            border-radius: 10px;
-            overflow: hidden;
-            z-index: 1;
+        #nextBtn.visible {
+            opacity: 1;
+            pointer-events: auto;
         }
 
-        .logo-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        #nextBtn:hover {
+            transform: scale(1.05);
         }
 
-        .fade-out {
-            animation: fadeOut 0.6s ease forwards;
-        }
-
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                transform: scale(0.98);
-            }
+        #nextBtn:active {
+            transform: scale(0.95);
         }
     </style>
 </head>
 
 <body>
-    <div class="content-box">
-        <div class="line" style="font-size: 28px; font-weight: bold;">CHROMATIC SOUL</div>
-        <div class="line">จะพาคุณดำดิ่งกับโลก</div>
-        <div class="line">แห่งจินตนาการที่คุณเอง</div>
-        <div class="line">สามารถสร้างมันขึ้นมาได้</div>
-
-        <button onclick="goNext()">NEXT</button>
-    </div>
-
-    <div class="logo-box">
-        <img src="Logo2-03.png" alt="Logo" />
+    <div class="wrapper" id="wrapper">
+        <div class="content-box" id="textBox"></div>
+        <button id="nextBtn" onclick="goNext()">NEXT</button>
     </div>
 
     <script>
-        const lines = document.querySelectorAll('.line');
-        lines.forEach((line, index) => {
+        const textBox = document.getElementById('textBox');
+        const nextBtn = document.getElementById('nextBtn');
+        const wrapper = document.getElementById('wrapper');
+
+        const firstParagraph = [
+            "CHROMATIC SOUL",
+            "จะพาคุณดำดิ่งกับโลกแห่งจินตนาการ",
+            "ที่คุณเองสามารถสร้างมันขึ้นมาได้"
+        ];
+
+        const secondParagraph = [
+            "เรามาร่วมสร้างจินตนาการนี้",
+            "ไปด้วยกันเถอะ"
+        ];
+
+        let currentSet = 0;
+        let currentLine = 0;
+        let delay = 1200;
+        let skipping = false;
+        let timer;
+
+        function showNextLine() {
+            const paragraph = currentSet === 0 ? firstParagraph : secondParagraph;
+
+            if (currentLine >= paragraph.length) {
+                if (currentSet === 0) {
+                    setTimeout(() => {
+                        textBox.innerHTML = "";
+                        currentSet = 1;
+                        currentLine = 0;
+                        delay = 1200;
+                        showNextLine();
+                    }, 1000);
+                } else {
+                    nextBtn.classList.add('visible');
+                }
+                return;
+            }
+
+            const line = document.createElement('div');
+            line.classList.add('line');
+            line.textContent = paragraph[currentLine];
+            textBox.appendChild(line);
+
             setTimeout(() => {
                 line.classList.add('visible');
-            }, index * 1000);
+            }, 20);
+
+            currentLine++;
+            timer = setTimeout(showNextLine, delay);
+        }
+
+        document.body.addEventListener('click', () => {
+            if (!skipping) {
+                skipping = true;
+                clearTimeout(timer);
+                delay = delay > 300 ? delay - 200 : 150;
+                showNextLine();
+            }
         });
 
         function goNext() {
             document.body.classList.add('fade-out');
             setTimeout(() => {
-                window.location.href = "page5.html"; // แก้ชื่อหน้านี้ตามจริง
+                window.location.href = "page6.html";
             }, 600);
         }
+
+        window.onload = () => {
+            showNextLine();
+        };
     </script>
 </body>
 

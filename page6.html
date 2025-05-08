@@ -14,19 +14,30 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             height: 100vh;
-            margin-top: 70px;
-            margin-bottom: 40px;
             overflow: hidden;
             position: relative;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         h1 {
             font-size: 26px;
             text-align: center;
-            margin-bottom: px;
-            margin-top: px;
+            margin-top: 20px;
+            margin-bottom: 40px;
             line-height: 1.6;
             color: #e35229;
             z-index: 1;
@@ -36,18 +47,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 40px ;
-            margin-top: 150px;
+            gap: 30px;
+            margin-bottom: 50px;
             z-index: 1;
         }
 
         .arrow {
-            font-size: 60px;
+            font-size: 48px;
+            font-weight: bold;
             color: #4f7d94;
             cursor: pointer;
             user-select: none;
-            margin-top: px;
-            margin: 0 20px;
+            transition: transform 0.2s ease, color 0.3s ease;
+        }
+
+        .arrow:hover {
+            color: #e35229;
+            transform: scale(1.2);
         }
 
         .number-display {
@@ -56,8 +72,6 @@
             color: #e35229;
             width: 100px;
             text-align: center;
-            margin-top: 20px;
-            opacity: 1;
             transition: opacity 0.3s ease;
         }
 
@@ -66,7 +80,6 @@
         }
 
         button {
-            margin-top: px ;
             padding: 14px 40px;
             border: none;
             border-radius: 40px;
@@ -76,24 +89,18 @@
             cursor: pointer;
             transition: transform 0.2s ease, background-color 0.3s ease;
             z-index: 1;
+            margin-top: 30px;
         }
 
         button:hover {
             background-color: #3c6475;
+            transform: scale(1.05);
         }
 
         button:active {
             transform: scale(0.95);
         }
 
-        .logo {
-            margin-top: 0px;
-            width: 200px;
-            height: auto;
-            z-index: 1;
-        }
-
-        /* Page fade-out */
         .fade-out {
             animation: fadeOut 0.6s ease forwards;
         }
@@ -108,18 +115,15 @@
 </head>
 
 <body>
-
     <h1>คุณคิดว่าแปรงไหน<br>ดูเหมาะกับคุณ</h1>
 
     <div class="selector-container">
-        <div class="arrow" onclick="prev()">&#8592;</div>
+        <div class="arrow" onclick="prev()">&lt;</div>
         <div class="number-display" id="brush-number">1</div>
-        <div class="arrow" onclick="next()">&#8594;</div>
+        <div class="arrow" onclick="next()">&gt;</div>
     </div>
 
     <button onclick="confirm()">CONFIRM</button>
-
-    <img class="logo" src="Logo2-03.png" alt="Logo" />
 
     <script>
         let currentIndex = 1;
@@ -146,11 +150,26 @@
         function confirm() {
             document.body.classList.add('fade-out');
             setTimeout(() => {
-                window.location.href = "page7.html"; // แก้เป็นชื่อหน้าถัดไปจริง
+                // เลือกหน้าที่จะไปตามเลขที่เลือก
+                switch (currentIndex) {
+                    case 1:
+                        window.location.href = "pageA.html"; // เปลี่ยนเป็นหน้าที่ต้องการ
+                        break;
+                    case 2:
+                        window.location.href = "pageB.html";
+                        break;
+                    case 3:
+                        window.location.href = "pageC.html";
+                        break;
+                    case 4:
+                        window.location.href = "pageD.html";
+                        break;
+                    default:
+                        window.location.href = "pageA.html"; // ค่าเริ่มต้น
+                }
             }, 600);
         }
     </script>
-
 </body>
 
 </html>

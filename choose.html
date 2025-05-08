@@ -12,11 +12,11 @@
 
         html,
         body {
-             height: 100%;
+            height: 100%;
             margin: 0;
             padding: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: url("Artboard\ 5\ copy.png") no-repeat center center fixed;
+            background: url("Artboard 5 copy.png") no-repeat center center fixed;
             background-size: cover;
             overflow: hidden;
             color: #e35229;
@@ -38,11 +38,9 @@
             position: absolute;
             inset: 0;
             background-image: url("");
-            /* 👈 เปลี่ยนตรงนี้เป็นชื่อไฟล์ของหนู */
             background-size: cover;
             background-position: center;
             opacity: 0.15;
-            /* คุมความจางให้เนื้อหาชัด */
             z-index: -1;
         }
 
@@ -64,23 +62,32 @@
         }
 
         h1 {
-            color: #2b819f
+            color: #e35229;
             text-align: center;
             margin-bottom: 30px;
             font-size: 1.5rem;
         }
 
+        .time-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
         .time-slot {
-            border: 2px solid #2b819f;
-            border-radius: 40px;
-            padding: 14px 24px;
-            margin: 10px 0;
-            width: 100%;
-            max-width: 280px;
-            text-align: center;
             background-color: white;
-            transition: all 0.3s ease;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 20px;
+            width: 140px;
+            text-align: center;
+            font-size: 1rem;
             cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
 
         .time-slot:hover {
@@ -91,11 +98,10 @@
             background-color: #d0e6f0;
             font-weight: bold;
             transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
 
         button {
-            margin-top: 30px;
             padding: 14px 40px;
             border: none;
             border-radius: 40px;
@@ -119,12 +125,14 @@
 <body>
     <h1>เลือกรอบเวลาเพื่อเข้างาน</h1>
 
-    <div class="time-slot">10:00 - 11:00</div>
-    <div class="time-slot">11:00 - 12:00</div>
-    <div class="time-slot">12:00 - 13:00</div>
-    <div class="time-slot">13:00 - 14:00</div>
-    <div class="time-slot">14:00 - 15:00</div>
-    <div class="time-slot">15:00 - 16:00</div>
+    <div class="time-container">
+        <div class="time-slot">10:00 - 11:00</div>
+        <div class="time-slot">11:00 - 12:00</div>
+        <div class="time-slot">12:00 - 13:00</div>
+        <div class="time-slot">13:00 - 14:00</div>
+        <div class="time-slot">14:00 - 15:00</div>
+        <div class="time-slot">15:00 - 16:00</div>
+    </div>
 
     <button onclick="goToNext()">CONFIRM</button>
 
@@ -144,7 +152,7 @@
             if (selectedSlot) {
                 document.body.classList.add("fade-out");
                 setTimeout(() => {
-                    window.location.href = "welcome.html"; // เปลี่ยนตามหน้าถัดไปจริง
+                    window.location.href = "welcome.html";
                 }, 600);
             } else {
                 alert("กรุณาเลือกช่วงเวลาก่อนนะคะ");
