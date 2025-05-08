@@ -6,9 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
     <style>
+        @font-face {
+            font-family: 'DB Helvethaica X Ext';
+            src: url('./ThaiSansNeue-SemiBold.otf') format('truetype');
+        }
+
         * {
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'DB Helvethaica X Ext', sans-serif;
         }
 
         html,
@@ -16,7 +21,7 @@
             height: 100%;
             margin: 0;
             padding: 0;
-            background: url("Artboard\ 5\ copy.png") no-repeat center center fixed;
+            background: url("Artboard 5 copy.png") no-repeat center center fixed;
             background-size: cover;
             overflow: hidden;
         }
@@ -34,7 +39,7 @@
             border-radius: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px;
+            max-width: 440px;
             text-align: center;
             padding: 2rem 1.5rem 2rem;
             backdrop-filter: blur(8px);
@@ -75,12 +80,13 @@
         }
 
         input {
-            padding: 0.8rem 1rem;
+            padding: 0.7rem 1rem;
             border: none;
             border-radius: 999px;
             background: #e0f7ff;
             color: #2e7791;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.2;
         }
 
         input::placeholder {
@@ -90,10 +96,10 @@
         button {
             background: #e35229;
             color: white;
-            padding: 0.8rem;
+            padding: 0.75rem;
             border: none;
             border-radius: 999px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: bold;
             cursor: pointer;
             transition: transform 0.15s ease-in-out;
@@ -122,11 +128,9 @@
     </div>
 
     <script>
-
         window.onload = () => {
             document.body.style.opacity = '1';
         };
-
 
         function goToTimePage() {
             document.body.style.opacity = '0';

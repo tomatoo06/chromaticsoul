@@ -9,13 +9,18 @@
         * {
             box-sizing: border-box;
         }
+        @font-face {
+            font-family: 'ThaiSansNeue-SemiBold';
+            src: url('./ThaiSansNeue-SemiBold.otf') format('truetype');
+        }
+
 
         html,
         body {
             height: 100%;
             margin: 0;
             padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'ThaiSansNeue-SemiBold';
             background: url("Artboard 5 copy.png") no-repeat center center fixed;
             background-size: cover;
             overflow: hidden;
@@ -108,6 +113,7 @@
             background-color: #e35229;
             color: white;
             font-size: 18px;
+            font-family: 'ThaiSansNeue-SemiBold';
             cursor: pointer;
             transition: transform 0.2s ease, background-color 0.3s ease;
         }
