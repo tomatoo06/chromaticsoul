@@ -9,11 +9,11 @@
         * {
             box-sizing: border-box;
         }
+
         @font-face {
             font-family: 'ThaiSansNeue-SemiBold';
             src: url('./ThaiSansNeue-SemiBold.otf') format('truetype');
         }
-
 
         html,
         body {
@@ -148,7 +148,23 @@
 
     <button onclick="goToNext()">CONFIRM</button>
 
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB9rPT6eJVgKzO8NWUZZCSfyiiDJ9D8cMg",
+            authDomain: "chromatic-soul-4be98.firebaseapp.com",
+            projectId: "chromatic-soul-4be98",
+            storageBucket: "chromatic-soul-4be98.appspot.com",
+            messagingSenderId: "462766469206",
+            appId: "1:462766469206:web:350687694f973fac29cbf7",
+            measurementId: "G-NE4NZPQVET"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
         const slots = document.querySelectorAll('.time-slot');
         let selectedSlot = null;
 
@@ -160,16 +176,58 @@
             });
         });
 
-        function goToNext() {
-            if (selectedSlot) {
+        window.onload = () => {
+            const userData = localStorage.getItem('userData');
+            if (!userData) {
+                alert("กรุณาลงทะเบียนก่อนเลือกเวลา");
+                window.location.href = 'register.html';
+                return;
+            }
+            document.body.style.opacity = '1';
+        };
+
+        window.goToNext = async function () {
+            if (!selectedSlot) {
+                alert("กรุณาเลือกช่วงเวลาก่อนนะคะ");
+                return;
+            }
+
+            const userData = JSON.parse(localStorage.getItem('userData'));
+            if (!userData) {
+                alert("กรุณาลงทะเบียนก่อนเลือกเวลา");
+                window.location.href = 'register.html';
+                return;
+            }
+
+            try {
+                const q = query(collection(db, "registrations"), where("studentId", "==", userData.studentId));
+                const querySnapshot = await getDocs(q);
+
+                if (!querySnapshot.empty) {
+                    const docRef = querySnapshot.docs[0].ref;
+                    await updateDoc(docRef, { timeSlot: selectedSlot });
+                } else {
+                    await addDoc(collection(db, "registrations"), {
+                        name: userData.name,
+                        surname: userData.surname,
+                        studentId: userData.studentId,
+                        timeSlot: selectedSlot
+                    });
+                }
+
+                userData.timeSlot = selectedSlot;
+                localStorage.setItem("userData", JSON.stringify(userData));
+
                 document.body.classList.add("fade-out");
                 setTimeout(() => {
                     window.location.href = "welcome.html";
                 }, 600);
-            } else {
-                alert("กรุณาเลือกช่วงเวลาก่อนนะคะ");
+
+            } catch (error) {
+                console.error("เกิดข้อผิดพลาดในการบันทึกข้อมูลเวลาที่เลือก:", error);
+                alert("บันทึกข้อมูลไม่สำเร็จ กรุณาลองใหม่");
             }
-        }
+        };
     </script>
 </body>
 
