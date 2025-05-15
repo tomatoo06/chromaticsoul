@@ -72,7 +72,7 @@
         }
 
         #brush-image {
-            width: 200px;
+            width: 225px;
             height: auto;
             transition: opacity 0.3s ease;
         }
@@ -149,26 +149,12 @@
         }
 
         function confirm() {
-            document.body.classList.add('fade-out');  // เพิ่มการหายไป
-            setTimeout(() => {
-                switch (currentIndex) {
-                    case 1:
-                        window.location.href = "page7.html";
-                        break;
-                    case 2:
-                        window.location.href = "page8.html";
-                        break;
-                    case 3:
-                        window.location.href = "page9.html";
-                        break;
-                    case 4:
-                        window.location.href = "page10.html";
-                        break;
-                    default:
-                        window.location.href = "pageA.html";
-                }
-            }, 600);  // รอจนกว่าจะเสร็จสิ้นการอนิเมชัน
-        }
+                document.body.classList.add('fade-out');
+                setTimeout(() => {
+                    window.location.href = `select-color.html?brush=${currentIndex}`;
+                }, 600);
+            }
+
     </script>
 </body>
 
