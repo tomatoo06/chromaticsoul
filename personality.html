@@ -98,7 +98,7 @@
     .qr-popup.show-popup {
       opacity: 1;
       pointer-events: auto;
-      transform: scale(1) translateX(-5%);
+      transform: scale(1) translateX(-5%) translateY(-3%);
     }
 
     .qr-card {
@@ -142,7 +142,15 @@
       display: flex;
       justify-content: center;
       gap: 20px;
-      margin-top: 10px;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    #downloadQR {
+      margin-left: 15px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
     }
 
     .close-area {
@@ -180,7 +188,7 @@
       </div>
       <div class="buttons-wrapper">
         <div class="close-area" onclick="closeQR()" role="button" tabindex="0" aria-label="ปิด QR Code">×</div>
-        <button id="downloadQR" class="qr-button">บันทึก QR</button>
+        <button id="downloadQR" class="qr-button">Save</button>
       </div>
     </div>
   </div>
