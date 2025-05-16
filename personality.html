@@ -26,16 +26,14 @@
 }
 
 .personality-img {
-  width: 90vw;
+  width: 90vw;              /* ใหญ่พอดีกับจอแต่ไม่เต็มขอบ */
   max-width: 90vw;
-  height: auto;
-  max-height: 75vh;
-  object-fit: contain;
+  height: auto;             /* รักษาสัดส่วนภาพ */
+  max-height: 75vh;         /* จำกัดไม่ให้สูงเกินจอ */
+  object-fit: contain;      /* ไม่ให้ภาพยืดหรือบีบ */
   border-radius: 16px;
-  margin-bottom: 1.5vh;
+  margin-bottom: 1.5vh;     /* ระยะห่างเล็กน้อยจากปุ่ม */
   display: block;
-}
-
 }
 
 .qr-button {
@@ -49,7 +47,6 @@
   cursor: pointer;
   transition: background-color 0.3s;
 }
-
 
     .qr-button:hover {
       background-color: #3c6475;
