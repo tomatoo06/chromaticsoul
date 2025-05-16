@@ -11,10 +11,8 @@
             src: local('DB Helvethaica X Ext');
         }
 
-        html, body {
+        body {
             margin: 0;
-            padding: 0;
-            height: 100%;
             font-family: 'DB Helvethaica X Ext', sans-serif;
             background-image: url('WEBSITE_BG.png');
             background-size: cover;
@@ -24,8 +22,10 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            min-height: 100vh;
             text-align: center;
             animation: fadeIn 1s ease;
+            padding: 1vh 2vw; /* เว้นขอบเล็กน้อย */
             box-sizing: border-box;
         }
 
@@ -42,37 +42,34 @@
         }
 
         h1 {
-            font-size: 28px;
+            font-size: 4vw;
             color: #333;
             background-color: rgba(255, 255, 255, 0.8);
-            padding: 10px 20px;
-            border-radius: 30px;
-            margin: 10px 0;
-            flex-shrink: 0;
+            padding: 1vh 2vw;
+            border-radius: 12px;
+            margin: 0;
         }
 
         .personality-img {
-            max-width: 120vw;       /* พอดีไม่ใหญ่เกิน */
-            max-height: 55vh;      /* สูงพอดี */
+            max-width: 85vw; /* ใหญ่พอดีกับหน้าจอ */
+            max-height: 70vh; /* สูงพอเหมาะ */
             width: auto;
             height: auto;
+            margin: 3vh 0 0 0; /* เว้นบนเล็กน้อย */
             border-radius: 16px;
-            margin: 0;
-            flex-shrink: 0;
-            object-fit: contain;
         }
 
         .qr-button {
-            margin-top: 4px;       /* ชิดภาพมากขึ้น */
-            padding: 8px 25px;
-            font-size: 16px;
+            margin-top: 6px; /* ชิดภาพแบบสมดุล */
+            padding: 8px 24px;
+            font-size: 4vw; /* ขนาดปุ่มเหมาะกับมือถือ */
             border: none;
             border-radius: 25px;
             background-color: #e35229;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s;
-            flex-shrink: 0;
+            box-sizing: border-box;
         }
 
         .qr-button:hover {
@@ -153,36 +150,12 @@
             color: #fff;
             cursor: pointer;
         }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 24px;
-                padding: 8px 16px;
-                margin: 8px 0;
-            }
-
-            .personality-img {
-                max-width: 90vw;
-                max-height: 50vh;
-            }
-
-            .qr-button {
-                font-size: 14px;
-                padding: 7px 20px;
-                margin-top: 3px;
-            }
-
-            .qr-card {
-                width: 180px;
-                height: 180px;
-            }
-        }
     </style>
 </head>
 
 <body>
     <h1></h1>
-    <img id="person-img" class="personality-img" src="" alt="บุคลิกของคุณ" />
+    <img id="person-img" class="personality-img" src="" alt="บุคลิกของคุณ">
     <button class="qr-button" onclick="toggleQR()">QR CODE</button>
 
     <div class="overlay" id="overlay" onclick="closeQR()"></div>
