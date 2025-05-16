@@ -11,19 +11,19 @@
       src: local('DB Helvethaica X Ext');
     }
 
-   body {
-  margin: 0;
-  font-family: 'DB Helvethaica X Ext', sans-serif;
-  background: url('WEBSITE_BG.png') no-repeat center center / cover;
-  display: flex;
-  flex-direction: column; /* ใช้แนวตั้งแทนการจัดศูนย์กลางทั้งหมด */
-  align-items: center;
-  justify-content: flex-start; /* ไม่บีบให้ทุกอย่างอยู่กลางแนวตั้ง */
-  min-height: 100vh;
-  padding: 4vh 4vw; /* เพิ่ม padding ขอบจอแบบมือถือ */
-  box-sizing: border-box;
-  text-align: center;
-}
+    body {
+      margin: 0;
+      font-family: 'DB Helvethaica X Ext', sans-serif;
+      background: url('WEBSITE_BG.png') no-repeat center center / cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 4vh 4vw;
+      box-sizing: border-box;
+      text-align: center;
+    }
 
     .content-wrapper {
       display: flex;
@@ -41,7 +41,7 @@
       max-height: 90vh;
       object-fit: contain;
       border-radius: 20px;
-      margin-bottom: -10vh; /* ลดระยะห่างลง */
+      margin-bottom: -10vh;
     }
 
     .qr-button {
@@ -56,6 +56,10 @@
       color: white;
       cursor: pointer;
       transition: background-color 0.3s;
+      margin-top: 10px;
+      text-decoration: none;
+      display: inline-block;
+      user-select: none;
     }
 
     .qr-button:hover {
@@ -77,28 +81,27 @@
       display: block;
     }
 
-   .qr-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: 0.3s ease;
-  z-index: 10;
-  pointer-events: none;
-  transform: scale(0.8);
-}
+    .qr-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: 0.3s ease;
+      z-index: 10;
+      pointer-events: none;
+      transform: scale(0.8) translateX(-5%);
+    }
 
-.qr-popup.show-popup {
-  opacity: 1;
-  pointer-events: auto;
-  transform: scale(1);
-}
-
+    .qr-popup.show-popup {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1) translateX(-5%);
+    }
 
     .qr-card {
       width: 220px;
@@ -141,28 +144,32 @@
       font-size: 24px;
       color: #fff;
       cursor: pointer;
+      user-select: none;
     }
   </style>
 </head>
 
 <body>
   <div class="content-wrapper">
-    <img id="person-img" class="personality-img" src="" alt="บุคลิกของคุณ">
+    <img id="person-img" class="personality-img" src="" alt="บุคลิกของคุณ" />
     <button class="qr-button" onclick="toggleQR()">QR CODE</button>
   </div>
 
   <div class="overlay" id="overlay" onclick="closeQR()"></div>
 
   <div class="qr-popup" id="qrPopup">
-    <div class="qr-card" id="qrCard">
-      <div class="qr-front">
-        <img id="qr-front-img" src="" alt="QR Code Front" />
+    <div>
+      <div class="qr-card" id="qrCard">
+        <div class="qr-front">
+          <img id="qr-front-img" src="" alt="QR Code Front" />
+        </div>
+        <div class="qr-back">
+          <img id="qr-back-img" src="" alt="QR Code Back" />
+        </div>
       </div>
-      <div class="qr-back">
-        <img id="qr-back-img" src="" alt="QR Code Back" />
-      </div>
+      <div class="close-area" onclick="closeQR()">×</div>
+      <a id="downloadQR" class="qr-button" download="my-qr.png">บันทึก QR</a>
     </div>
-    <div class="close-area" onclick="closeQR()">×</div>
   </div>
 
   <script>
@@ -176,6 +183,10 @@
     document.getElementById('person-img').src = personSrc;
     document.getElementById('qr-front-img').src = qrSrc;
     document.getElementById('qr-back-img').src = qrSrc;
+
+    // ตั้งลิงก์ดาวน์โหลดให้ปุ่มบันทึก QR
+    const downloadBtn = document.getElementById('downloadQR');
+    downloadBtn.href = qrSrc;
 
     function toggleQR() {
       document.getElementById('overlay').classList.add('active');
