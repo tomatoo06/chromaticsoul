@@ -11,29 +11,31 @@
       src: local('DB Helvethaica X Ext');
     }
 
-    body {
-      margin: 0;
-      font-family: 'DB Helvethaica X Ext', sans-serif;
-      background: url('WEBSITE_BG.png') no-repeat center center / cover;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-      padding: 5vh 4vw;
-      box-sizing: border-box;
-      text-align: center;
-    }
+  body {
+  margin: 0;
+  font-family: 'DB Helvethaica X Ext', sans-serif;
+  background: url('WEBSITE_BG.png') no-repeat center center / cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 5vh 4vw 3vh; /* เพิ่ม padding-top ตรงนี้ */
+  box-sizing: border-box;
+  text-align: center;
+}
 
-  .personality-img {
-  width: 90vw;              /* ใหญ่พอดีกับจอแต่ไม่เต็มขอบ */
+.personality-img {
+  width: 90vw;
   max-width: 90vw;
-  height: auto;             /* รักษาสัดส่วนภาพ */
-  max-height: 75vh;         /* จำกัดไม่ให้สูงเกินจอ */
-  object-fit: contain;      /* ไม่ให้ภาพยืดหรือบีบ */
+  height: auto;
+  max-height: 75vh;
+  object-fit: contain;
   border-radius: 16px;
-  margin-bottom: 1.5vh;     /* ระยะห่างเล็กน้อยจากปุ่ม */
+  margin-bottom: 1.5vh;
   display: block;
+}
+
 }
 
 .qr-button {
