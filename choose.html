@@ -21,8 +21,6 @@
             margin: 0;
             padding: 0;
             font-family: 'ThaiSansNeue-SemiBold';
-            background: url("WEBSITE_BG.png") no-repeat center center fixed;
-            background-size: cover;
             overflow: hidden;
             color: #e35229;
         }
@@ -36,6 +34,17 @@
             animation: fadeIn 0.6s ease forwards;
             padding: 20px;
             position: relative;
+        }
+
+        /* พื้นหลังภาพแบบ img */
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
         }
 
         @keyframes fadeIn {
@@ -125,6 +134,9 @@
 </head>
 
 <body>
+    <!-- แทรกภาพพื้นหลังด้วย img -->
+    <img src="WEBSITE_BG.png" alt="background" class="background-image" />
+
     <h1>เลือกรอบเวลาเพื่อเข้างาน</h1>
 
     <div class="time-container">
