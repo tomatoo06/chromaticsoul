@@ -118,7 +118,7 @@
 
     <div class="selector-container">
         <div class="arrow" onclick="prev()">&lt;</div>
-        <img id="brush-image" src="brush/brush1.png" alt="แปรงที่เลือก" />
+        <img id="brush-image" src="assets/brush/brush1.png" alt="แปรงที่เลือก" />
 
         <div class="arrow" onclick="next()">&gt;</div>
     </div>
@@ -132,8 +132,7 @@
         function updateDisplay(newIndex) {
             brushImage.style.opacity = 0;
             setTimeout(() => {
-                brushImage.src = `brush/brush${newIndex}.png`;
-
+                brushImage.src = `assets/brush/brush${newIndex}.png`;
                 brushImage.style.opacity = 1;
             }, 150);
         }
