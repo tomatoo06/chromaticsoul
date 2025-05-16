@@ -92,13 +92,13 @@
       transition: 0.3s ease;
       z-index: 10;
       pointer-events: none;
-      transform: scale(0.8) translateX(-5%);
+      transform: scale(0.8) translateY(-5%);
     }
 
     .qr-popup.show-popup {
       opacity: 1;
       pointer-events: auto;
-      transform: scale(1) translateX(-5%) translateY(-3%);
+      transform: scale(1) translateY(-5%);
     }
 
     .qr-popup-inner {
@@ -106,6 +106,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding-top: 40px; /* ให้มีช่องว่างด้านบน ป้องกันทับ */
     }
 
     .qr-card {
@@ -147,8 +148,8 @@
 
     .close-area {
       position: absolute;
-      top: 8px;
-      right: 8px;
+      top: 0;
+      right: 0;
       font-size: 28px;
       color: #fff;
       cursor: pointer;
@@ -164,11 +165,10 @@
     }
 
     #downloadQR {
-      margin-top: 20px;
+      margin-top: 28px;
       font-weight: 600;
       font-size: 1.1rem;
       cursor: pointer;
-      margin-left: 0;
     }
   </style>
 </head>
