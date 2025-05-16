@@ -38,17 +38,6 @@
             position: relative;
         }
 
-        body::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image: url("");
-            background-size: cover;
-            background-position: center;
-            opacity: 0.15;
-            z-index: -1;
-        }
-
         @keyframes fadeIn {
             to {
                 opacity: 1;
@@ -89,7 +78,7 @@
             padding: 12px 20px;
             width: 140px;
             text-align: center;
-            font-size: 1rem;
+            font-size: 1.25rem;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -104,6 +93,13 @@
             font-weight: bold;
             transform: scale(1.05);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .time-slot.full {
+            background-color: #eee;
+            color: #999;
+            cursor: not-allowed;
+            font-weight: normal;
         }
 
         button {
@@ -150,7 +146,14 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            getDocs,
+            query,
+            where
+        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyB9rPT6eJVgKzO8NWUZZCSfyiiDJ9D8cMg",
@@ -165,26 +168,34 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        const slots = document.querySelectorAll('.time-slot');
+        const slots = document.querySelectorAll(".time-slot");
         let selectedSlot = null;
 
-        slots.forEach(slot => {
-            slot.addEventListener('click', () => {
-                slots.forEach(s => s.classList.remove('selected'));
-                slot.classList.add('selected');
-                selectedSlot = slot.textContent;
+        async function updateSlotAvailability() {
+            for (const slot of slots) {
+                const time = slot.textContent.trim().split("\n")[0];
+                const q = query(collection(db, "registrations"), where("time", "==", time));
+                const snapshot = await getDocs(q);
+
+                if (snapshot.size >= 13) {
+                    slot.classList.add("full");
+                    slot.innerHTML = `${time}<br><small>เต็มแล้ว</small>`;
+                    slot.style.pointerEvents = "none";
+                    slot.style.opacity = 0.5;
+                }
+            }
+        }
+
+        updateSlotAvailability();
+
+        slots.forEach((slot) => {
+            slot.addEventListener("click", () => {
+                if (slot.classList.contains("full")) return;
+                slots.forEach((s) => s.classList.remove("selected"));
+                slot.classList.add("selected");
+                selectedSlot = slot.textContent.trim().split("\n")[0];
             });
         });
-
-        window.onload = () => {
-            const userData = localStorage.getItem('userData');
-            if (!userData) {
-                alert("กรุณาลงทะเบียนก่อนเลือกเวลา");
-                window.location.href = 'register.html';
-                return;
-            }
-            document.body.style.opacity = '1';
-        };
 
         window.goToNext = async function () {
             if (!selectedSlot) {
@@ -192,40 +203,35 @@
                 return;
             }
 
-            const userData = JSON.parse(localStorage.getItem('userData'));
+            const userData = JSON.parse(localStorage.getItem("userData"));
             if (!userData) {
-                alert("กรุณาลงทะเบียนก่อนเลือกเวลา");
-                window.location.href = 'register.html';
+                alert("ไม่พบข้อมูลผู้ใช้ กรุณากรอกหน้าแรกใหม่");
+                window.location.href = "register.html";
+                return;
+            }
+
+            const q = query(collection(db, "registrations"), where("time", "==", selectedSlot));
+            const snapshot = await getDocs(q);
+            if (snapshot.size >= 13) {
+                alert("ขออภัย รอบเวลานี้เต็มแล้ว กรุณาเลือกรอบอื่น");
+                window.location.reload();
                 return;
             }
 
             try {
-                const q = query(collection(db, "registrations"), where("studentId", "==", userData.studentId));
-                const querySnapshot = await getDocs(q);
-
-                if (!querySnapshot.empty) {
-                    const docRef = querySnapshot.docs[0].ref;
-                    await updateDoc(docRef, { timeSlot: selectedSlot });
-                } else {
-                    await addDoc(collection(db, "registrations"), {
-                        name: userData.name,
-                        surname: userData.surname,
-                        studentId: userData.studentId,
-                        timeSlot: selectedSlot
-                    });
-                }
-
-                userData.timeSlot = selectedSlot;
-                localStorage.setItem("userData", JSON.stringify(userData));
+                await addDoc(collection(db, "registrations"), {
+                    ...userData,
+                    time: selectedSlot,
+                    timestamp: new Date(),
+                });
 
                 document.body.classList.add("fade-out");
                 setTimeout(() => {
                     window.location.href = "welcome.html";
                 }, 600);
-
             } catch (error) {
-                console.error("เกิดข้อผิดพลาดในการบันทึกข้อมูลเวลาที่เลือก:", error);
-                alert("บันทึกข้อมูลไม่สำเร็จ กรุณาลองใหม่");
+                console.error("เกิดข้อผิดพลาดในการบันทึก:", error);
+                alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาลองใหม่");
             }
         };
     </script>
