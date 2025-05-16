@@ -43,6 +43,7 @@
       justify-content: center;
       animation: fadeIn 0.6s ease forwards;
       padding: 20px;
+      padding-top: 60px; /* เพิ่มระยะห่างจากด้านบน */
     }
 
     @keyframes fadeIn {
@@ -58,7 +59,7 @@
     }
 
     h1 {
-      font-size: 26px;
+      font-size: 36px; /* ขนาดใหญ่ขึ้น */
       text-align: center;
       margin: 0 0 40px 0;
       line-height: 1.6;
@@ -130,7 +131,7 @@
 
     @media (max-width: 600px) {
       h1 {
-        font-size: 20px;
+        font-size: 24px;
         margin-bottom: 30px;
       }
 
@@ -146,12 +147,15 @@
         padding: 12px 30px;
         font-size: 16px;
       }
+
+      .content {
+        padding-top: 40px; /* บนมือถือ ขยับลงน้อยลง */
+      }
     }
   </style>
 </head>
 
 <body>
-  <!-- พื้นหลังแบบ <img> -->
   <img src="WEBSITE_BG.png" alt="background" class="bg-img" />
 
   <div class="content">
