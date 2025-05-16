@@ -49,17 +49,12 @@
             border-radius: 12px;
         }
 
-        .personality-img {
-            max-width: 98vw;    /* ขยายภาพเกือบเต็มความกว้างหน้าจอ */
-            max-height: 80vh;   /* ขยายความสูงภาพเพิ่ม */
-            width: auto;
-            height: auto;
-            margin: 5px 0;      /* ลดระยะห่างบน-ล่างเหลือแค่ 5px */
-            border-radius: 16px;
-        }
+       .personality-img {
+    margin: 0; /* ลบช่องว่างรอบ ๆ ภาพทั้งหมด */
+}
 
-       .qr-button {
-    margin-top: 0;  /* ปุ่มชิดภาพทันที */
+.qr-button {
+    margin-top: 0; /* ชิดปุ่มกับภาพ */
     padding: 8px 20px;
     font-size: 14px;
     border: none;
@@ -69,6 +64,7 @@
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 
 
         .qr-button:hover {
