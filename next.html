@@ -2,182 +2,178 @@
 <html lang="th">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CHROMATIC SOUL</title>
-    <style>
-        @font-face {
-            font-family: 'DB Helvethaica X Ext';
-            src: url('./ThaiSansNeue-SemiBold.otf') format('truetype');
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHROMATIC SOUL</title>
+  <style>
+    @font-face {
+      font-family: 'DB Helvethaica X Ext';
+      src: url('./ThaiSansNeue-SemiBold.otf') format('truetype');
+    }
 
-        html, body {
-            margin: 0;
-            height: 100%;
-            font-family: 'DB Helvethaica X Ext';
-            overflow: hidden;
-        }
+    body {
+      margin: 0;
+      font-family: 'DB Helvethaica X Ext';
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
 
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            transition: opacity 0.6s ease;
-            position: relative;
-            padding: 20px;
-            color: #2b819f;
-        }
+    .bg-img {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
 
-        .background-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            z-index: -1;
-        }
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100%;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+      padding: 20px;
+    }
 
-        .fade-out {
-            opacity: 0;
-        }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
 
-        .wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            max-width: 90%;
-        }
+    .line {
+      font-size: 25px;
+      color: #2b819f;
+      margin: 10px 0;
+      line-height: 1.6;
+      max-width: 400px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
 
-        .line {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            font-size: 25px;
-            color: #2b819f;
-            margin: 10px 0;
-            line-height: 1.6;
-            max-width: 400px;
-        }
+    .line.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .line.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    #nextBtn {
+      margin-top: 40px;
+      padding: 14px 40px;
+      border: none;
+      border-radius: 40px;
+      font-family: 'DB Helvethaica X Ext';
+      background-color: #e35229;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.3s ease;
+    }
 
-        #nextBtn {
-            margin-top: 40px;
-            padding: 14px 40px;
-            border: none;
-            border-radius: 40px;
-            font-family: 'DB Helvethaica X Ext';
-            background-color: #e35229;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.5s ease, transform 0.3s ease, background-color 0.3s ease;
-            pointer-events: none;
-        }
+    #nextBtn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
 
-        #nextBtn.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
+    #nextBtn:hover {
+      transform: scale(1.05);
+    }
 
-        #nextBtn:hover {
-            transform: scale(1.05);
-        }
-
-        #nextBtn:active {
-            transform: scale(0.95rem);
-        }
-    </style>
+    #nextBtn:active {
+      transform: scale(0.95);
+    }
+  </style>
 </head>
 
 <body>
-    <img src="Artboard 5 copy.png" alt="background" class="background-image" />
-    <div class="wrapper" id="wrapper">
-        <div class="content-box" id="textBox"></div>
-        <button id="nextBtn" onclick="goNext()">NEXT</button>
-    </div>
+  <!-- 👇 พื้นหลังแบบ <img> -->
+  <img src="website-bg.png" alt="Background" class="bg-img" />
 
-    <script>
-        const textBox = document.getElementById('textBox');
-        const nextBtn = document.getElementById('nextBtn');
-        const wrapper = document.getElementById('wrapper');
+  <div class="wrapper" id="wrapper">
+    <div class="content-box" id="textBox"></div>
+    <button id="nextBtn" onclick="goNext()">NEXT</button>
+  </div>
 
-        const firstParagraph = [
-            "CHROMATIC SOUL",
-            "จะพาคุณดำดิ่งกับโลกแห่งจินตนาการ",
-            "ที่คุณเองสามารถสร้างมันขึ้นมาได้"
-        ];
+  <script>
+    const textBox = document.getElementById('textBox');
+    const nextBtn = document.getElementById('nextBtn');
 
-        const secondParagraph = [
-            "เรามาร่วมสร้างจินตนาการนี้",
-            "ไปด้วยกันเถอะ"
-        ];
+    const firstParagraph = [
+      "CHROMATIC SOUL",
+      "จะพาคุณดำดิ่งกับโลกแห่งจินตนาการ",
+      "ที่คุณเองสามารถสร้างมันขึ้นมาได้"
+    ];
 
-        let currentSet = 0;
-        let currentLine = 0;
-        let delay = 1200;
-        let skipping = false;
-        let timer;
+    const secondParagraph = [
+      "เรามาร่วมสร้างจินตนาการนี้",
+      "ไปด้วยกันเถอะ"
+    ];
 
-        function showNextLine() {
-            const paragraph = currentSet === 0 ? firstParagraph : secondParagraph;
+    let currentSet = 0;
+    let currentLine = 0;
+    let delay = 1200;
+    let skipping = false;
+    let timer;
 
-            if (currentLine >= paragraph.length) {
-                if (currentSet === 0) {
-                    setTimeout(() => {
-                        textBox.innerHTML = "";
-                        currentSet = 1;
-                        currentLine = 0;
-                        delay = 1200;
-                        showNextLine();
-                    }, 1000);
-                } else {
-                    nextBtn.classList.add('visible');
-                }
-                return;
-            }
+    function showNextLine() {
+      const paragraph = currentSet === 0 ? firstParagraph : secondParagraph;
 
-            const line = document.createElement('div');
-            line.classList.add('line');
-            line.textContent = paragraph[currentLine];
-            textBox.appendChild(line);
-
-            setTimeout(() => {
-                line.classList.add('visible');
-            }, 20);
-
-            currentLine++;
-            timer = setTimeout(showNextLine, delay);
-        }
-
-        document.body.addEventListener('click', () => {
-            if (!skipping) {
-                skipping = true;
-                clearTimeout(timer);
-                delay = delay > 300 ? delay - 200 : 150;
-                showNextLine();
-            }
-        });
-
-        function goNext() {
-            document.body.classList.add('fade-out');
-            setTimeout(() => {
-                window.location.href = "page6.html";
-            }, 600);
-        }
-
-        window.onload = () => {
+      if (currentLine >= paragraph.length) {
+        if (currentSet === 0) {
+          setTimeout(() => {
+            textBox.innerHTML = "";
+            currentSet = 1;
+            currentLine = 0;
+            delay = 1200;
             showNextLine();
-        };
-    </script>
+          }, 1000);
+        } else {
+          nextBtn.classList.add('visible');
+        }
+        return;
+      }
+
+      const line = document.createElement('div');
+      line.classList.add('line');
+      line.textContent = paragraph[currentLine];
+      textBox.appendChild(line);
+
+      setTimeout(() => {
+        line.classList.add('visible');
+      }, 20);
+
+      currentLine++;
+      timer = setTimeout(showNextLine, delay);
+    }
+
+    document.body.addEventListener('click', () => {
+      if (!skipping) {
+        skipping = true;
+        clearTimeout(timer);
+        delay = delay > 300 ? delay - 200 : 150;
+        showNextLine();
+      }
+    });
+
+    function goNext() {
+      document.body.style.opacity = 0;
+      setTimeout(() => {
+        window.location.href = "page6.html";
+      }, 600);
+    }
+
+    window.onload = () => {
+      showNextLine();
+    };
+  </script>
 </body>
 
 </html>
