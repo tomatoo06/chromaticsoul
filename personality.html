@@ -57,8 +57,6 @@
       cursor: pointer;
       transition: background-color 0.3s;
       margin-top: 10px;
-      text-decoration: none;
-      display: inline-block;
       user-select: none;
     }
 
@@ -108,6 +106,7 @@
       height: 220px;
       perspective: 1000px;
       position: relative;
+      margin: 0 auto;
     }
 
     .qr-card img {
@@ -139,12 +138,24 @@
       transform: rotateY(360deg);
     }
 
-    .close-area {
+    .buttons-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
       margin-top: 10px;
+    }
+
+    .close-area {
       font-size: 24px;
       color: #fff;
       cursor: pointer;
       user-select: none;
+      line-height: 1;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
     }
   </style>
 </head>
@@ -157,7 +168,7 @@
 
   <div class="overlay" id="overlay" onclick="closeQR()"></div>
 
-  <div class="qr-popup" id="qrPopup">
+  <div class="qr-popup" id="qrPopup" role="dialog" aria-modal="true" aria-labelledby="qrPopupLabel">
     <div>
       <div class="qr-card" id="qrCard">
         <div class="qr-front">
@@ -167,8 +178,10 @@
           <img id="qr-back-img" src="" alt="QR Code Back" />
         </div>
       </div>
-      <div class="close-area" onclick="closeQR()">×</div>
-      <a id="downloadQR" class="qr-button" download="my-qr.png">บันทึก QR</a>
+      <div class="buttons-wrapper">
+        <div class="close-area" onclick="closeQR()" role="button" tabindex="0" aria-label="ปิด QR Code">×</div>
+        <button id="downloadQR" class="qr-button">บันทึก QR</button>
+      </div>
     </div>
   </div>
 
@@ -184,9 +197,16 @@
     document.getElementById('qr-front-img').src = qrSrc;
     document.getElementById('qr-back-img').src = qrSrc;
 
-    // ตั้งลิงก์ดาวน์โหลดให้ปุ่มบันทึก QR
     const downloadBtn = document.getElementById('downloadQR');
-    downloadBtn.href = qrSrc;
+
+    downloadBtn.addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.href = qrSrc;
+      link.download = `my-qr-${brush}-${color}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
 
     function toggleQR() {
       document.getElementById('overlay').classList.add('active');
