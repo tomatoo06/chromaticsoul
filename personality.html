@@ -11,18 +11,19 @@
       src: local('DB Helvethaica X Ext');
     }
 
-    body {
-      margin: 0;
-      font-family: 'DB Helvethaica X Ext', sans-serif;
-      background: url('WEBSITE_BG.png') no-repeat center center / cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 0 4vw;
-      box-sizing: border-box;
-      text-align: center;
-    }
+   body {
+  margin: 0;
+  font-family: 'DB Helvethaica X Ext', sans-serif;
+  background: url('WEBSITE_BG.png') no-repeat center center / cover;
+  display: flex;
+  flex-direction: column; /* ใช้แนวตั้งแทนการจัดศูนย์กลางทั้งหมด */
+  align-items: center;
+  justify-content: flex-start; /* ไม่บีบให้ทุกอย่างอยู่กลางแนวตั้ง */
+  min-height: 100vh;
+  padding: 4vh 4vw; /* เพิ่ม padding ขอบจอแบบมือถือ */
+  box-sizing: border-box;
+  text-align: center;
+}
 
     .content-wrapper {
       display: flex;
