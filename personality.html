@@ -11,54 +11,52 @@
       src: local('DB Helvethaica X Ext');
     }
 
-   body {
-    margin: 0;
-    font-family: 'DB Helvethaica X Ext', sans-serif;
-    background: url('WEBSITE_BG.png') no-repeat center center / cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 0 4vw;
-    box-sizing: border-box;
-    text-align: center;
-  }
+    body {
+      margin: 0;
+      font-family: 'DB Helvethaica X Ext', sans-serif;
+      background: url('WEBSITE_BG.png') no-repeat center center / cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 0 4vw;
+      box-sizing: border-box;
+      text-align: center;
+    }
 
-  .content-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+    .content-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
-  .personality-img {
-    width: 85vw;
-    max-width: 500px;
-    height: auto;
-    max-height: 65vh;
-    object-fit: contain;
-    border-radius: 20px;
-    margin-bottom: 2vh;
-  }
+    .personality-img {
+      width: 85vw;
+      max-width: 500px;
+      height: auto;
+      max-height: 65vh;
+      object-fit: contain;
+      border-radius: 20px;
+      margin-bottom: 2vh;
+    }
 
-  .qr-button {
-    padding: 1.5vh 6vw;
-    font-size: 4.5vw;
-    max-width: 300px;
-    width: 60vw;
-    border: none;
-    border-radius: 50px;
-    background-color: #e35229;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+    .qr-button {
+      padding: 1.5vh 6vw;
+      font-size: 4.5vw;
+      max-width: 300px;
+      width: 60vw;
+      border: none;
+      border-radius: 50px;
+      background-color: #e35229;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-  .qr-button:hover {
-    background-color: #3c6475;
-  }
-
-
+    .qr-button:hover {
+      background-color: #3c6475;
+    }
 
     .overlay {
       position: fixed;
@@ -138,8 +136,10 @@
 </head>
 
 <body>
-  <img id="person-img" class="personality-img" src="" alt="บุคลิกของคุณ">
-  <button class="qr-button" onclick="toggleQR()">QR CODE</button>
+  <div class="content-wrapper">
+    <img id="person-img" class="personality-img" src="" alt="บุคลิกของคุณ">
+    <button class="qr-button" onclick="toggleQR()">QR CODE</button>
+  </div>
 
   <div class="overlay" id="overlay" onclick="closeQR()"></div>
 
