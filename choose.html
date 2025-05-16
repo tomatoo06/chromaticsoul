@@ -21,21 +21,10 @@
             margin: 0;
             padding: 0;
             font-family: 'ThaiSansNeue-SemiBold';
-            /* background เอาออก เพราะจะใช้ img แทน */
+            background: url("WEBSITE_BG.png") no-repeat center center fixed;
+            background-size: cover;
             overflow: hidden;
             color: #e35229;
-            position: relative;
-        }
-
-        /* background image แบบ img */
-        img.background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            z-index: -1; /* ให้อยู่ด้านหลัง */
         }
 
         body {
@@ -47,7 +36,6 @@
             animation: fadeIn 0.6s ease forwards;
             padding: 20px;
             position: relative;
-            z-index: 1; /* ให้อยู่เหนือ background image */
         }
 
         @keyframes fadeIn {
@@ -137,9 +125,6 @@
 </head>
 
 <body>
-    <!-- เพิ่มภาพ background แบบ img -->
-    <img src="Artboard 5 copy.png" alt="พื้นหลัง" class="background" />
-
     <h1>เลือกรอบเวลาเพื่อเข้างาน</h1>
 
     <div class="time-container">
