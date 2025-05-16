@@ -58,21 +58,31 @@
             
         }
 
-        .qr-button {
-             margin-top: -90px;
-            padding: 10px 30px;
-            font-size: 18px;
-            border: none;
-            border-radius: 25px;
-            background-color: #e35229;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+.qr-button {
+    margin-top: 30px; /* ปรับให้เว้นระยะห่างจากรูปภาพด้านบน */
+    padding: 14px 40px; /* ปรับขนาดปุ่มให้ใหญ่ขึ้น กดง่าย */
+    font-size: 20px; /* ตัวหนังสือใหญ่ อ่านง่าย */
+    font-weight: 600;
+    border: none;
+    border-radius: 40px; /* มุมปุ่มโค้งมน */
+    background-color: #e35229;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(227, 82, 41, 0.4);
+    user-select: none;
+}
 
-        .qr-button:hover {
-            background-color: #3c6475;
-        }
+.qr-button:hover {
+    background-color: #cf4b23; /* โทนสีเข้มขึ้นเวลาชี้ */
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(207, 75, 35, 0.6);
+}
+
+.qr-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 3px 6px rgba(207, 75, 35, 0.8);
+}
 
         .overlay {
             position: fixed;
