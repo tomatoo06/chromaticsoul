@@ -16,14 +16,22 @@
             font-family: 'DB Helvethaica X Ext', sans-serif;
         }
 
-        html,
-        body {
+        html, body {
             height: 100%;
             margin: 0;
             padding: 0;
-            background: url("WEBSITE_BG.png") no-repeat center center fixed;
-            background-size: cover;
             overflow: hidden;
+        }
+
+        /* ภาพพื้นหลังแบบ img */
+        img.background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1; /* อยู่ด้านหลัง */
         }
 
         body {
@@ -44,6 +52,8 @@
             padding: 2rem 1.5rem 2rem;
             backdrop-filter: blur(8px);
             animation: popUp 0.4s ease-in-out;
+            position: relative; /* เพื่อให้เหนือภาพพื้นหลัง */
+            z-index: 1;
         }
 
         @keyframes popUp {
@@ -116,6 +126,9 @@
 </head>
 
 <body>
+    <!-- แทน background CSS ด้วย img -->
+    <img src="WEBSITE_BG.png" alt="พื้นหลังเว็บไซต์" class="background" />
+
     <div class="card">
         <img src="Logo2-03.png" alt="โลโก้งาน" class="logo" />
         <h2>REGISTER</h2>
