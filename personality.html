@@ -11,67 +11,49 @@
             src: local('DB Helvethaica X Ext');
         }
 
-        body {
-        margin: 0;
-        font-family: 'DB Helvethaica X Ext', sans-serif;
-        background-image: url('WEBSITE_BG.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        text-align: center;
-        animation: fadeIn 1s ease;
-        padding: 20px; /* เว้นขอบด้านบนล่าง */
-        box-sizing: border-box;
-        }
+      body {
+    margin: 0;
+    font-family: 'DB Helvethaica X Ext', sans-serif;
+    background-image: url('WEBSITE_BG.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    animation: fadeIn 1s ease;
+    padding: 20px; /* เว้นขอบด้านบนล่าง */
+    box-sizing: border-box;
+}
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
+.personality-img {
+    max-width: 80vw; /* กว้างไม่เกิน 80% ของ viewport width */
+    max-height: 60vh; /* สูงไม่เกิน 60% ของ viewport height */
+    width: auto;
+    height: auto;
+    margin: 20px 0;
+    border-radius: 16px;
+}
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.qr-button {
+    margin-top: 20px; /* เพิ่มช่องว่างระหว่างภาพกับปุ่ม */
+    padding: 10px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    background-color: #e35229;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-        h1 {
-            font-size: 28px;
-            color: #333;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 10px 20px;
-            border-radius: 12px;
-        }
+.qr-button:hover {
+    background-color: #3c6475;
+}
 
-        .personality-img {
-            max-width: 70%;
-            height: auto;
-            margin: 20px 0;
-            border-radius: 16px;
-            
-        }
-
-        .qr-button {
-            margin-top: -90px;
-            padding: 10px 30px;
-            font-size: 18px;
-            border: none;
-            border-radius: 25px;
-            background-color: #e35229;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .qr-button:hover {
-            background-color: #3c6475;
-        }
 
         .overlay {
             position: fixed;
