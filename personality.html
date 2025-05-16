@@ -81,32 +81,29 @@
 
     .qr-popup {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       opacity: 0;
       transition: 0.3s ease;
       z-index: 10;
       pointer-events: none;
-      transform: scale(0.8) translateY(-5%);
     }
 
     .qr-popup.show-popup {
       opacity: 1;
       pointer-events: auto;
-      transform: scale(1) translateY(-5%);
     }
 
     .qr-popup-inner {
+      background: white;
+      padding: 20px 20px 30px;
+      border-radius: 20px;
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 40px; /* ให้มีช่องว่างด้านบน ป้องกันทับ */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
 
     .qr-card {
@@ -114,7 +111,6 @@
       height: 220px;
       perspective: 1000px;
       position: relative;
-      margin: 0 auto;
     }
 
     .qr-card img {
@@ -122,7 +118,8 @@
       height: 100%;
       object-fit: contain;
       border-radius: 15px;
-      border: 20px solid white;
+      border: 10px solid white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     }
 
     .qr-front,
@@ -148,27 +145,36 @@
 
     .close-area {
       position: absolute;
-      top: 0;
-      right: 0;
-      font-size: 28px;
+      top: -10px;
+      right: -10px;
+      font-size: 22px;
       color: #fff;
-      cursor: pointer;
-      user-select: none;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.6);
       width: 32px;
       height: 32px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
       z-index: 20;
     }
 
     #downloadQR {
-      margin-top: 28px;
+      margin-top: 30px;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1rem;
       cursor: pointer;
+      background-color: #3c6475;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 24px;
+      transition: background-color 0.3s;
+    }
+
+    #downloadQR:hover {
+      background-color: #2d4e60;
     }
   </style>
 </head>
@@ -181,9 +187,8 @@
 
   <div class="overlay" id="overlay" onclick="closeQR()"></div>
 
-  <div class="qr-popup" id="qrPopup" role="dialog" aria-modal="true" aria-labelledby="qrPopupLabel">
+  <div class="qr-popup" id="qrPopup">
     <div class="qr-popup-inner">
-      <div class="close-area" onclick="closeQR()" role="button" tabindex="0" aria-label="ปิด QR Code">×</div>
       <div class="qr-card" id="qrCard">
         <div class="qr-front">
           <img id="qr-front-img" src="" alt="QR Code Front" />
@@ -191,8 +196,9 @@
         <div class="qr-back">
           <img id="qr-back-img" src="" alt="QR Code Back" />
         </div>
+        <div class="close-area" onclick="closeQR()">×</div>
       </div>
-      <button id="downloadQR" class="qr-button">Save</button>
+      <button id="downloadQR">Save</button>
     </div>
   </div>
 
