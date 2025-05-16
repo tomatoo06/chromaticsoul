@@ -47,19 +47,15 @@
             border-radius: 12px;
         }
 
-       .personality-img {
-    max-width: 90%;   /* ขยายจาก 70% เป็น 90% */
-    height: auto;
-    margin: 0 auto;   /* จัดให้อยู่ตรงกลางแนวนอน */
-    margin-top: -20px; /* ขยับขึ้น */
-    border-radius: 16px;
-    transition: all 0.3s ease; /* ทำให้ขยับนุ่มนวล */
-}
+        .personality-img {
+            max-width: 70%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 16px;
             
         }
 
-
-  .qr-button {
+        .qr-button {
             margin-top: -90px;
             padding: 10px 30px;
             font-size: 18px;
@@ -73,6 +69,7 @@
 
         .qr-button:hover {
             background-color: #3c6475;
+        }
 
         .overlay {
             position: fixed;
@@ -172,41 +169,43 @@
         <div class="close-area" onclick="closeQR()">×</div>
     </div>
 
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const brush = params.get('brush');
-        const color = params.get('color');
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const brush = params.get('brush');
+    const color = params.get('color');
 
-        const personSrc = `personalities/${brush}-${color}.png`;
-        const qrSrc = `qr/qr-${brush}-${color}.png`;
+    const personSrc = `./personalities/${brush}-${color}.png`;
+    const qrSrc = `./qr/qr-${brush}-${color}.png`;
 
-        document.getElementById('person-img').src = personSrc;
-        document.getElementById('qr-front-img').src = qrSrc;
-        document.getElementById('qr-back-img').src = qrSrc;
+    document.getElementById('person-img').src = personSrc;
+    document.getElementById('qr-front-img').src = qrSrc;
+    document.getElementById('qr-back-img').src = qrSrc;
 
-        function toggleQR() {
-            const popup = document.getElementById('qrPopup');
-            const overlay = document.getElementById('overlay');
-            const card = document.getElementById('qrCard');
+    function toggleQR() {
+        const popup = document.getElementById('qrPopup');
+        const overlay = document.getElementById('overlay');
+        const card = document.getElementById('qrCard');
 
-            overlay.classList.add('active');
-            popup.classList.add('show-popup');
+        overlay.classList.add('active');
+        popup.classList.add('show-popup');
 
-            setTimeout(() => {
-                card.classList.add('flip-card');
-            }, 100);
-        }
+        setTimeout(() => {
+            card.classList.add('flip-card');
+        }, 100);
+    }
 
-        function closeQR() {
-            const popup = document.getElementById('qrPopup');
-            const overlay = document.getElementById('overlay');
-            const card = document.getElementById('qrCard');
+    function closeQR() {
+        const popup = document.getElementById('qrPopup');
+        const overlay = document.getElementById('overlay');
+        const card = document.getElementById('qrCard');
 
-            card.classList.remove('flip-card');
-            popup.classList.remove('show-popup');
-            overlay.classList.remove('active');
-        }
-    </script>
+        card.classList.remove('flip-card');
+        popup.classList.remove('show-popup');
+        overlay.classList.remove('active');
+    }
+</script>
+
+
 </body>
 
 </html>
