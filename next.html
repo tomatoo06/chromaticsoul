@@ -6,22 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CHROMATIC SOUL</title>
     <style>
-         @font-face {
+        @font-face {
             font-family: 'DB Helvethaica X Ext';
             src: url('./ThaiSansNeue-SemiBold.otf') format('truetype');
         }
 
-        body {
+        html, body {
             margin: 0;
+            height: 100%;
             font-family: 'DB Helvethaica X Ext';
-            background: url("Artboard 5 copy.png") no-repeat center center fixed;
-            background-size: cover;
+            overflow: hidden;
+        }
+
+        body {
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            overflow: hidden;
             transition: opacity 0.6s ease;
+            position: relative;
+            padding: 20px;
+            color: #2b819f;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
         }
 
         .fade-out {
@@ -84,6 +99,7 @@
 </head>
 
 <body>
+    <img src="Artboard 5 copy.png" alt="background" class="background-image" />
     <div class="wrapper" id="wrapper">
         <div class="content-box" id="textBox"></div>
         <button id="nextBtn" onclick="goNext()">NEXT</button>
